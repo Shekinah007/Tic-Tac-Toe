@@ -1,24 +1,118 @@
-body, p, h1, h2, h3, h4 {
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Rubik+Iso&display=swap');
+
+body, p, h1, h2, h3, h4, h5 {
     margin: 0;
+    padding:0;
 }
 
 body {
     min-height: 100vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* font-family: 'Rubik Iso'; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    justify-content: center;  
+}
+
+.container {
+    background: chocolate;
+    display: flex;
+    flex-direction: column;
 }
 
 .board {
-    width: 400px;
-    aspect-ratio: 1/1;
-    background-color: brown;
+    /* width: min(350px, 90vw); */
+    /* width: max(40%, 300px); */
+    width: clamp(300px, 50%, 400px);
+    width: 300px;
+    height: 300px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 20px;
+    padding: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
+    font-size: 50px;
+    font-family: 'Rubik Dirt','Rubik Iso';
 }
 
 .cell {
-    background-color: coral;
-    /* height: 30px;
-    width: 30px; */
+    background-color: rgb(240, 240, 240);
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    transition: 0.4s;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.cell:active {
+    /* background-color: thistle; */
+    transform: scale(0.9);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+.modal {
+    position: fixed;
+    
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transition: 0.3s;
+    border-radius: 10px;
+    font-size: 40px;
+    background-color: #fff;
+    font-family: 'Rubik Iso';
+    
+    width: 300px;
+    height: 0;
+    padding: 0;
+    overflow: hidden; 
+
+
+    /* width: 350px;
+    height: 200px; 
+    padding: 20px; */
+}
+
+.display {
+    height: 200px; 
+    padding: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    bottom: 0;
+    
+    background-color: rgba(54, 54, 54, 0.5);
+    display: none;
+}
+
+.overlay-display {
+    display: initial;
+}
+
+button {
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Rubik Iso';
+    background:rgb(201, 236, 149);
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
