@@ -17,16 +17,19 @@
         <form>
         <div class="playerInput">
             <div class="player-div">
-                <label for="player1" >Player 1:</label>
-                <input type="text" placeholder="Player 1" id="player1" name="player_one" value="Player 1" maxlength="30">
+                <!-- <label for="player1" >Player 1:</label> -->
+                <input type="text" placeholder="Player 1 (X)" id="player1" name="player_one" maxlength="30">
             </div>
+            <div>VS</div>
             <div class="player-div">
-                <label for="player2">Player 2:</label>
-                <input type="text" placeholder="Player 2" id="player2" name="player_two" value="Player 2" maxlength="30">
+                <!-- <label for="player2">Player 2:</label> -->
+                <input type="text" placeholder="Player 2 (O)" id="player2" name="player_two"  maxlength="30">
             </div>
         </div>
         </form>
+        <button class="vsCPU">vsCPU</button>
         <a href="play.html" class="play">Play!</a>
+
     </div>
     <script src="indexScript.js" type="module" defer></script>
 </body>

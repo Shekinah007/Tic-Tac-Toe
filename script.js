@@ -1,14 +1,15 @@
 // import { playerOne } from "./indexScript.js";
 // console.log("Player One: ", playerOne.name);
 
+const player1Input = document.querySelector("#player1");
+const player2Input = document.querySelector("#player2");
+
 const body = document.querySelector("body");
 const cells = document.querySelectorAll(".cell");
 const resetButton = document.querySelector(".reset");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const modalMessage = document.querySelector(".message");
-const player1Input = document.querySelector("#player1");
-const player2Input = document.querySelector("#player2");
 const playButton = document.querySelector(".play");
 const player1Display = document.querySelector(".player1");
 const player2Display = document.querySelector(".player2");
@@ -227,9 +228,6 @@ class GameState {
   }
 }
 
-let roundOne = new GameState(player1, player2);
-roundOne.play();
-
 // playButton.addEventListener("click", () => {
 //   console.log("Hello");
 
@@ -257,3 +255,11 @@ resetButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   resetGame();
 });
+
+let roundOne = new GameState(player1, player2);
+
+if (player2.name == "Roboto The Robot") {
+  roundOne.playerPlay();
+} else {
+  roundOne.play();
+}
