@@ -14,6 +14,14 @@ const player1Display = document.querySelector(".player1");
 const player2Display = document.querySelector(".player2");
 const restartButton = document.querySelector(".restart");
 const quit1Button = document.querySelector(".home1");
+const close = document.querySelector(".close");
+
+close.addEventListener("click", () => {
+  modal.classList.remove("display");
+  overlay.classList.remove("overlay-display");
+  quit1Button.style.display = "block";
+  restartButton.style.display = "block";
+});
 
 class Player {
   constructor(name, playerSide) {
@@ -197,7 +205,6 @@ class GameState {
         if (this.currentPlayer === player1) {
           this.currentPlayer = this.player2;
         } else {
-          this.cpuPlay();
           this.currentPlayer = this.player1;
         }
       });
@@ -221,7 +228,7 @@ class GameState {
 }
 
 let roundOne = new GameState(player1, player2);
-roundOne.gamePlay();
+roundOne.play();
 
 // playButton.addEventListener("click", () => {
 //   console.log("Hello");
@@ -231,10 +238,22 @@ roundOne.gamePlay();
 //   // roundOne.play();
 // });
 
-resetButton.addEventListener("click", () => {
+function resetGame() {
   roundOne.newGame();
   modal.classList.remove("display");
   overlay.classList.remove("overlay-display");
   player1Display.classList.add("selected");
   player2Display.classList.remove("selected");
+}
+
+resetButton.addEventListener("click", () => {
+  resetGame();
+  modal.classList.remove("display");
+  overlay.classList.remove("overlay-display");
+  quit1Button.style.display = "block";
+  restartButton.style.display = "block";
+});
+
+restartButton.addEventListener("click", () => {
+  resetGame();
 });
