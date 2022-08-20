@@ -13,14 +13,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;  
-    justify-content: center;  
+    justify-content: space-around;  
+    background-color: rgb(193, 212, 247);
+
 }
+
 
 .container {
     background: chocolate;
     display: flex;
     flex-direction: column;
 }
+
+.home {
+    background-color: rgb(193, 212, 247);
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.home h1 {
+    font-size: 10vw;
+    font-family: "Rubik Dirt";
+} 
 
 .board {
     /* width: min(350px, 90vw); */
@@ -74,7 +92,9 @@ body {
     background-color: #fff;
     font-family: 'Rubik Iso';
     
-    width: 300px;
+    /* width: 350px; */
+    width: clamp(300px, 50%, 400px);
+
     height: 0;
     padding: 0;
     overflow: hidden; 
@@ -105,7 +125,7 @@ body {
     display: initial;
 }
 
-button {
+button, a {
     border-radius: 10px;
     padding: 20px;
     font-size: 30px;
@@ -115,4 +135,56 @@ button {
     border: none;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.quit {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.play {
+    padding: 20px;
+}
+
+input {
+    /* outline: none; */
+    border: none;
+    height: 40px;
+    padding: 4px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.playerInput {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    /* background: chartreuse; */
+}
+
+.playerInput div {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.players {
+    display: flex;
+    gap: 10px;
+}
+.players > * {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+label {
+    font-size: 30px;
+}
+
+.selected {
+    background: greenyellow;
 }

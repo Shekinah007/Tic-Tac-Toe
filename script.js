@@ -1,9 +1,18 @@
+// import { playerOne } from "./indexScript.js";
+// console.log("Player One: ", playerOne.name);
+
+const body = document.querySelector("body");
 const cells = document.querySelectorAll(".cell");
 const resetButton = document.querySelector(".reset");
 const playerTurn = document.querySelector(".playerTurn");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const modalMessage = document.querySelector(".message");
+const player1Input = document.querySelector("#player1");
+const player2Input = document.querySelector("#player2");
+const playButton = document.querySelector(".play");
+const player1Display = document.querySelector(".player1");
+const player2Display = document.querySelector(".player2");
 
 class Player {
   constructor(name, playerSide) {
@@ -12,8 +21,12 @@ class Player {
   }
 }
 
-const player1 = new Player("Player 1", "X");
-const player2 = new Player("Player 2", "O");
+console.log(player2Input);
+
+const player1 = new Player(localStorage.getItem("playerOne"), "X");
+const player2 = new Player(localStorage.getItem("playerTwo"), "O");
+player1Display.innerText = player1.name;
+player2Display.innerText = player2.name;
 
 class GameState {
   constructor(player1, player2) {
@@ -93,6 +106,9 @@ class GameState {
         if (this.winState == "true" || this.winState == "draw") return;
         console.log(index + 1);
 
+        player1Display.classList.toggle("selected");
+        player2Display.classList.toggle("selected");
+
         this.updateGameState(index, this.currentPlayer);
         cell.innerText = this.currentPlayer.playerSide;
         this.win(this.currentPlayer, cell);
@@ -121,8 +137,18 @@ class GameState {
 let roundOne = new GameState(player1, player2);
 roundOne.play();
 
+// playButton.addEventListener("click", () => {
+//   console.log("Hello");
+
+//   player1 = new Player(player1Input.value, "X");
+//   player2 = new Player(player2Input.value, "O");
+//   // roundOne.play();
+// });
+
 resetButton.addEventListener("click", () => {
   roundOne.newGame();
   modal.classList.remove("display");
   overlay.classList.remove("overlay-display");
+  player1Display.classList.add("selected");
+  player2Display.classList.remove("selected");
 });

@@ -4,33 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Home</title>
     <link href="styles.css" rel="stylesheet">
-    <script src="script.js" defer></script>
+    <!-- <script src="script.js" defer></script> -->
+    <script src="indexScript.js" type="module" defer></script>
 </head>
 <body>
-    <div class="overlay"></div>
-        <div class="modal">
-            <p class="message"></p>
-            <button class="reset">New Game</button>
-        </div>
-    <!-- <div class="container"> -->
-        <!-- Side Bar -->
-        <h1>Tic Tac Toe</h1>
-        <h2>Player Turn:</h2>
-        <h2 class="playerTurn">Player: </h2>
-        
-        <div class="board">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-    </div>
+   
     <!-- </div> -->
+    <div class="home">
+        <h1>Tic - Tac - Toe</h1>
+        <div class="playerInput">
+            <div class="player-div">
+                <label for="player1" >Player 1:</label>
+                <input type="text" placeholder="Player 1" id="player1" name="player_one" value="Player 1">
+            </div>
+            <div class="player-div">
+                <label for="player2">Player 2:</label>
+                <input type="text" placeholder="Player 2" id="player2" name="player_two" value="Player 2">
+            </div>
+        </div>
+        <a href="play.html" class="play">Play!</a>
+    </div>
+    <script src="indexScript.js" type="module" defer></script>
 </body>
 </html>
