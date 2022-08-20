@@ -44,6 +44,7 @@ body {
     /* padding: 3px; */
     width: 90%; 
     transition: 0.2s;
+    
 
     /* white-space: nowrap; */
     overflow: hidden;
@@ -98,13 +99,13 @@ button:active, a:active {
     gap: 10px;
     font-size: 50px;
     font-family: 'Rubik Dirt','Rubik Iso';
+
 }
 
 .cell {
     background-color: rgb(240, 240, 240);
     /* background-color: rgb(131, 214, 235); */
     background-color: rgb(193, 212, 247);
-
     display: grid;
     place-items: center;
     border-radius: 20px;
@@ -118,10 +119,20 @@ button:active, a:active {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
+/* @keyframes myAnim {
+	0% {
+		background-position: center top;
+		background-size: 100%;
+	}
+
+	100% {
+		background-position: center top;
+		background-size: 150%;
+	}
+} */
 
 .modal {
     position: fixed;
-    
     left: 0;
     right: 0;
     top: 0;
@@ -135,8 +146,10 @@ button:active, a:active {
     transition: 0.3s;
     border-radius: 10px;
     font-size: 40px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.801);
     font-family: 'Rubik Iso';
+
+    opacity: 0.9;
     
     /* width: 350px; */
     width: clamp(320px, 50%, 500px);
@@ -227,5 +240,16 @@ input {
    display: flex;
    align-items: center;
    gap: 10px;
+}
+
+.restart {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+.home1 {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
 

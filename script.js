@@ -12,6 +12,8 @@ const player2Input = document.querySelector("#player2");
 const playButton = document.querySelector(".play");
 const player1Display = document.querySelector(".player1");
 const player2Display = document.querySelector(".player2");
+const restartButton = document.querySelector(".restart");
+const quit1Button = document.querySelector(".home1");
 
 class Player {
   constructor(name, playerSide) {
@@ -31,6 +33,7 @@ class GameState {
     this.player2 = player2;
     this.currentPlayer = this.player1;
     this.boardTrack = ["", "", "", "", "", "", "", "", ""];
+    this.cpuOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     this.winState = "false";
   }
 
@@ -62,10 +65,12 @@ class GameState {
         this.boardTrack[2] != "")
     ) {
       this.winState = "true";
-      console.log(currentPlayer.name, " Wins!");
+      console.log(this.currentPlayer.name, " Wins!");
       modal.classList.add("display");
       overlay.classList.add("overlay-display");
-      modalMessage.innerText = currentPlayer.name + "  Wins!";
+      modalMessage.innerText = this.currentPlayer.name + "  Wins!";
+      quit1Button.style.display = "none";
+      restartButton.style.display = "none";
     } else if (
       this.boardTrack[0] != "" &&
       this.boardTrack[1] != "" &&
@@ -82,6 +87,8 @@ class GameState {
       modal.classList.add("display");
       overlay.classList.add("overlay-display");
       modalMessage.innerText = "Its a Draw!";
+      quit1Button.style.display = "none";
+      restartButton.style.display = "none";
     }
   }
 
@@ -92,6 +99,82 @@ class GameState {
     cells.forEach((cell) => {
       cell.innerText = "";
     });
+  }
+
+  cpuPlay() {
+    if (this.winState == "true" || this.winState == "draw") {
+      console.log("CPU WINS");
+      return;
+    }
+
+    let randomIndex = Math.ceil(Math.random() * this.boardTrack.length - 1);
+
+    console.log("CPU: ", randomIndex);
+    console.log("Cpu Current Player: ", this.currentPlayer);
+    cells.forEach((cell, index) => {
+      if (index == randomIndex) {
+        console.log("This is it! ", index);
+        if (cell.innerText != "") {
+          this.cpuPlay();
+        } else {
+          console.log("top");
+          cell.innerText = this.currentPlayer.playerSide;
+          this.updateGameState(index, this.currentPlayer);
+          this.win(this.currentPlayer, cell);
+          if (this.winState == "true" || this.winState == "draw") {
+            console.log("Cpu Win State");
+            return;
+          }
+          console.log("Bottom");
+          this.currentPlayer = this.player1;
+        }
+      }
+    });
+  }
+
+  playerPlay() {
+    cells.forEach((cell, index) => {
+      cell.addEventListener("click", () => {
+        if (cell.innerText != "") {
+          alert("That position is already occupied!");
+          return;
+        }
+        if (this.winState == "true" || this.winState == "draw") return;
+
+        player1Display.classList.toggle("selected");
+        player2Display.classList.toggle("selected");
+
+        this.updateGameState(index, this.currentPlayer);
+        cell.innerText = this.currentPlayer.playerSide;
+        this.win(this.currentPlayer, cell);
+
+        console.log("Player Current Player: ", this.currentPlayer);
+        this.currentPlayer = player2;
+
+        this.gamePlay();
+        // if (this.currentPlayer === player1) {
+        //   this.currentPlayer = this.player2;
+        // } else {
+        //   this.cpuPlay();
+        //   this.currentPlayer = this.player1;
+        // }
+      });
+    });
+  }
+
+  gamePlay() {
+    if (this.winState == "true" || this.winState == "draw") {
+      console.log("Win State");
+      return;
+    }
+    if (this.currentPlayer === player1) {
+      this.playerPlay();
+
+      // this.currentPlayer = this.player2;
+    } else if (this.currentPlayer === player2) {
+      this.cpuPlay();
+      console.log("This is Player 2");
+    }
   }
 
   play() {
@@ -114,6 +197,7 @@ class GameState {
         if (this.currentPlayer === player1) {
           this.currentPlayer = this.player2;
         } else {
+          this.cpuPlay();
           this.currentPlayer = this.player1;
         }
       });
@@ -126,12 +210,18 @@ class GameState {
         this.boardTrack[i] = currentPlayer.playerSide;
       }
     }
+    for (let i = 0; i < this.cpuOptions.length; i++) {
+      if (i == index) {
+        this.cpuOptions.splice(i, 1);
+      }
+    }
     console.log(this.boardTrack);
+    console.log("CPU Options: ", this.cpuOptions);
   }
 }
 
 let roundOne = new GameState(player1, player2);
-roundOne.play();
+roundOne.gamePlay();
 
 // playButton.addEventListener("click", () => {
 //   console.log("Hello");
