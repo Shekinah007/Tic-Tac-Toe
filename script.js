@@ -4,7 +4,6 @@
 const body = document.querySelector("body");
 const cells = document.querySelectorAll(".cell");
 const resetButton = document.querySelector(".reset");
-const playerTurn = document.querySelector(".playerTurn");
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const modalMessage = document.querySelector(".message");
@@ -21,12 +20,10 @@ class Player {
   }
 }
 
-console.log(player2Input);
-
 const player1 = new Player(localStorage.getItem("playerOne"), "X");
 const player2 = new Player(localStorage.getItem("playerTwo"), "O");
-player1Display.innerText = player1.name;
-player2Display.innerText = player2.name;
+player1Display.innerText = player1.name + " [X]";
+player2Display.innerText = player2.name + " [O]";
 
 class GameState {
   constructor(player1, player2) {
@@ -69,7 +66,6 @@ class GameState {
       modal.classList.add("display");
       overlay.classList.add("overlay-display");
       modalMessage.innerText = currentPlayer.name + "  Wins!";
-      // alert(currentPlayer.name + " Wins!");
     } else if (
       this.boardTrack[0] != "" &&
       this.boardTrack[1] != "" &&
@@ -86,7 +82,6 @@ class GameState {
       modal.classList.add("display");
       overlay.classList.add("overlay-display");
       modalMessage.innerText = "Its a Draw!";
-      // alert(currentPlayer.name + ": Its a draw!");
     }
   }
 
@@ -102,7 +97,10 @@ class GameState {
   play() {
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
-        if (cell.innerText != "") return;
+        if (cell.innerText != "") {
+          alert("That position is already occupied!");
+          return;
+        }
         if (this.winState == "true" || this.winState == "draw") return;
         console.log(index + 1);
 
@@ -115,10 +113,8 @@ class GameState {
 
         if (this.currentPlayer === player1) {
           this.currentPlayer = this.player2;
-          playerTurn.innerText = this.currentPlayer.name;
         } else {
           this.currentPlayer = this.player1;
-          playerTurn.innerText = this.currentPlayer.name;
         }
       });
     });
