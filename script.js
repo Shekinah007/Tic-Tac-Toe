@@ -1,5 +1,4 @@
 // import { playerOne } from "./indexScript.js";
-// console.log("Player One: ", playerOne.name);
 
 const player1Input = document.querySelector("#player1");
 const player2Input = document.querySelector("#player2");
@@ -74,7 +73,6 @@ class GameState {
         this.boardTrack[2] != "")
     ) {
       this.winState = "true";
-      console.log(this.currentPlayer.name, " Wins!");
       modal.classList.add("display");
       overlay.classList.add("overlay-display");
       modalMessage.innerText = this.currentPlayer.name + "  Wins!";
@@ -135,13 +133,15 @@ class GameState {
             return;
           }
           console.log("Bottom");
+          player1Display.classList.toggle("selected");
+          player2Display.classList.toggle("selected");
           this.currentPlayer = this.player1;
         }
       }
     });
   }
 
-  playerPlay() {
+  vsCPUPlay() {
     cells.forEach((cell, index) => {
       cell.addEventListener("click", () => {
         if (cell.innerText != "") {
@@ -160,28 +160,22 @@ class GameState {
         console.log("Player Current Player: ", this.currentPlayer);
         this.currentPlayer = player2;
 
-        this.gamePlay();
-        // if (this.currentPlayer === player1) {
-        //   this.currentPlayer = this.player2;
-        // } else {
-        //   this.cpuPlay();
-        //   this.currentPlayer = this.player1;
-        // }
+        this.nextTurn();
       });
     });
   }
 
-  gamePlay() {
+  nextTurn() {
     if (this.winState == "true" || this.winState == "draw") {
       console.log("Win State");
       return;
     }
     if (this.currentPlayer === player1) {
-      this.playerPlay();
-
-      // this.currentPlayer = this.player2;
+      this.vsCPUPlay();
     } else if (this.currentPlayer === player2) {
-      this.cpuPlay();
+      setTimeout(() => {
+        this.cpuPlay();
+      }, 500);
       console.log("This is Player 2");
     }
   }
@@ -248,8 +242,8 @@ resetButton.addEventListener("click", () => {
   resetGame();
   modal.classList.remove("display");
   overlay.classList.remove("overlay-display");
-  quit1Button.style.display = "block";
-  restartButton.style.display = "block";
+  quit1Button.style.display = "grid";
+  restartButton.style.display = "grid";
 });
 
 restartButton.addEventListener("click", () => {
@@ -259,7 +253,7 @@ restartButton.addEventListener("click", () => {
 let roundOne = new GameState(player1, player2);
 
 if (player2.name == "Roboto The Robot") {
-  roundOne.playerPlay();
+  roundOne.vsCPUPlay();
 } else {
   roundOne.play();
 }

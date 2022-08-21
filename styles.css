@@ -146,6 +146,7 @@ button:active, a:active {
     font-size: 40px;
     background-color: rgba(255, 255, 255, 0.9);
     font-family: 'Rubik Iso';
+    text-align: center ;
 
     opacity: 0.9;
     
@@ -289,7 +290,36 @@ label {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    /* width: 60px; */
+    display: grid;
+    place-items: center;
+    place-content: center;
 }
+
+.restart, .home1 {
+    display: grid;
+    place-items: center;
+    width: 140px;
+    height: 50px;
+    padding: 0;
+}
+
+.restart:hover, .home1:hover {
+    transform: scale(0.9);
+    cursor: pointer;
+}
+
+.restart {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+.home1 {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
 .close {
     position: absolute;
     right: 3px;
